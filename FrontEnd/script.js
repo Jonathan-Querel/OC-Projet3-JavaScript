@@ -1,3 +1,18 @@
+const galleryContainer = document.querySelector(".gallery")
+console.log(galleryContainer);
+const url = Array.from(galleryContainer.children)
+
+url.forEach(item =>{
+    const figcapElement = document.createElement ("figcaption");
+    figcapElement.innerText = item;
+    console.log(figcapElement);
+    imgElement.crossOrigin="anonymous";
+    imgElement.src="http:localhost:5678/api/works.imageUrl";
+    imgElement.alt="http:localhost:5678/api/works.title";
+    galleryContainer.appendChild(imgElement);
+})
+
+
 fetch('http://localhost:5678/api/works')
     .then (response => response.json())
     .then (data => {
@@ -5,10 +20,15 @@ fetch('http://localhost:5678/api/works')
             //createFigure(data);
     })
     .catch (error => {
-        console.error('Il y a eu un problème : ' + error.message);
+        console.error("Il y a eu un problème : " + error.message);
     });
 
-function createNode(figure){
+
+
+
+
+
+/*function createNode(figure){
     return document.createElement('figure');
 }
 const div = document.getElementById('.gallery');
@@ -24,7 +44,7 @@ fetch(url)
         alt.src=work.title;
 
     })
-
+*/
 /*function createFigure () {
 const divGallery = document.createElement("galery");
 const imgElement = document.createElement("img")
