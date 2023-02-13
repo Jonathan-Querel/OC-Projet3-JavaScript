@@ -10,7 +10,7 @@ buttonTous.classList.add("btn");
 divButton.appendChild(buttonTous);
 
 //Création des boutons
-const buildDomCategory = (category) => {
+const dataCategory = (category) => {
   const buttonElement = document.createElement("button");
   buttonElement.innerText = category.name;
   buttonElement.classList.add("btn");
@@ -18,13 +18,13 @@ const buildDomCategory = (category) => {
 };
 
 //Appel API
-const getCategory = async () => {
+const fetchCategory = async () => {
   try {
     const response = await fetch("http://localhost:5678/api/categories");
     const data = await response.json();
 
     for (let i = 0; i < data.length; i++) {
-      buildDomCategory(data[i]);
+      dataCategory(data[i]);
     }
   } catch (error) {
     console.error("Il y a eu un problème : " + error);
@@ -40,7 +40,7 @@ console.log(galleryContainer);
 document.querySelector(".gallery").innerHTML = "";
 
 //Construction du DOM
-const buildDomWork = (work) => {
+const dataWork = (work) => {
   const figureElement = document.createElement("figure");
   const imgElement = document.createElement("img");
   imgElement.src = work.imageUrl;
@@ -56,13 +56,13 @@ const buildDomWork = (work) => {
 };
 
 //Appel API
-const getWorks = async () => {
+const fetchWorks = async () => {
   try {
     const response = await fetch("http://localhost:5678/api/works");
     const data = await response.json();
 
     for (let i = 0; i < data.length; i++) {
-      buildDomWork(data[i]);
+      dataWork(data[i]);
     }
   } catch (error) {
     console.error("Il y a eu un problème : " + error);
@@ -70,5 +70,5 @@ const getWorks = async () => {
 };
 
 //Appel des fonctions pour les boutons et les projets
-getCategory();
-getWorks();
+fetchCategory();
+fetchWorks();
