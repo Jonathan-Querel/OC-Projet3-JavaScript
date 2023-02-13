@@ -1,71 +1,74 @@
-//const fetchCategory = fetch("http://localhost:5678/api/categories")
-//.then((response) => response.json())
-//.then((data) => dataCategory(data))
-//.catch((error) => {
-//  console.error("Il y a eu un problème : " + error);
-// });
+//Etape1 - Récupération de la section et création de la div qui englobe les boutons
 
-//console.log(fetchCategory);
-
-//function dataCategory = for (ind = 0 ; ind<dataCategory.length ; ind++) {}
 const mesProjets = document.querySelector("#portfolio");
-const divButton = document.createElement("divbutton");
+const divButton = document.createElement("div");
 divButton.classList.add("bouton");
 mesProjets.appendChild(divButton);
-const buttonElement1 = document.createElement("button");
-buttonElement1.innerText = "Tous";
-buttonElement1.classList.add("btn");
-divButton.appendChild(buttonElement1);
-const buttonElement2 = document.createElement("button");
-buttonElement2.innerText = "Objets";
-buttonElement2.classList.add("btn");
-divButton.appendChild(buttonElement2);
-const buttonElement3 = document.createElement("button");
-buttonElement3.innerText = "Appartements";
-buttonElement3.classList.add("btn");
-divButton.appendChild(buttonElement3);
-const buttonElement4 = document.createElement("button");
-buttonElement4.innerText = "Hôtels & restaurants";
-buttonElement4.classList.add("btn");
-divButton.appendChild(buttonElement4);
+const buttonTous = document.createElement("button");
+buttonTous.innerText = "Tous";
+buttonTous.classList.add("btn");
+divButton.appendChild(buttonTous);
 
+//Création des boutons
+const buildDomCategory = (category) => {
+  const buttonElement = document.createElement("button");
+  buttonElement.innerText = category.name;
+  buttonElement.classList.add("btn");
+  divButton.appendChild(buttonElement);
+};
+
+//Appel API
+const getCategory = async () => {
+  try {
+    const response = await fetch("http://localhost:5678/api/categories");
+    const data = await response.json();
+
+    for (let i = 0; i < data.length; i++) {
+      buildDomCategory(data[i]);
+    }
+  } catch (error) {
+    console.error("Il y a eu un problème : " + error);
+  }
+};
+
+//Etape 1
 //Récupération de la class gallery dans une constante
 const galleryContainer = document.querySelector(".gallery");
 console.log(galleryContainer);
-const galleryFigures = Array.from(galleryContainer.children);
-console.log(galleryFigures);
 
 //Suppression des données de la class gallery du fichier HTML
 document.querySelector(".gallery").innerHTML = "";
 
-const fetchWorks = fetch("http://localhost:5678/api/works");
+//Construction du DOM
+const buildDomWork = (work) => {
+  const figureElement = document.createElement("figure");
+  const imgElement = document.createElement("img");
+  imgElement.src = work.imageUrl;
+  imgElement.alt = work.title;
+  const figcaptionElement = document.createElement("figcaption");
+  figcaptionElement.innerText = work.title;
 
-fetchWorks
-  .then((response) => response.json())
-  .then((data) => {
-    dataWorks(data);
-  })
-  .catch((error) => {
+  //Rattachement des balises au DOM
+  figureElement.appendChild(imgElement);
+  figureElement.appendChild(figcaptionElement);
+
+  galleryContainer.appendChild(figureElement);
+};
+
+//Appel API
+const getWorks = async () => {
+  try {
+    const response = await fetch("http://localhost:5678/api/works");
+    const data = await response.json();
+
+    for (let i = 0; i < data.length; i++) {
+      buildDomWork(data[i]);
+    }
+  } catch (error) {
     console.error("Il y a eu un problème : " + error);
-  });
+  }
+};
 
-console.log(fetchWorks);
-
-function dataWorks(works) {
-  let indice = 0;
-  galleryFigures.forEach(() => {
-    const work = works[indice];
-    const figureElement = document.createElement("figure");
-    const imgElement = document.createElement("img");
-    imgElement.src = work.imageUrl;
-    imgElement.alt = work.title;
-    const figcaptionElement = document.createElement("figcaption");
-    figcaptionElement.innerText = work.title;
-
-    //Rattachement des balises au DOM
-    galleryContainer.appendChild(figureElement);
-    figureElement.appendChild(imgElement);
-    figureElement.appendChild(figcaptionElement);
-    indice++;
-  });
-}
+//Appel des fonctions pour les boutons et les projets
+getCategory();
+getWorks();
