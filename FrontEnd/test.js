@@ -22,7 +22,6 @@ const fetchCategory = async () => {
   try {
     const response = await fetch("http://localhost:5678/api/categories");
     const data = await response.json();
-
     for (let i = 0; i < data.length; i++) {
       dataCategory(data[i]);
     }
@@ -34,7 +33,6 @@ const fetchCategory = async () => {
 //Etape 1
 //Récupération de la class gallery dans une constante
 const galleryContainer = document.querySelector(".gallery");
-console.log(galleryContainer);
 
 //Suppression des données de la class gallery du fichier HTML
 document.querySelector(".gallery").innerHTML = "";
@@ -72,3 +70,12 @@ const fetchWorks = async () => {
 //Appel des fonctions pour les boutons et les projets
 fetchCategory();
 fetchWorks();
+
+const filtreObjets = document.querySelector("#btnObjets");
+filtreObjets.addEventListener("click", function () {});
+
+const filtreAppart = document.querySelector("btnAppart");
+filtreAppart.addEventListener("click", function () {});
+
+const filtreHotel = document.querySelector("btnHotel");
+filtreHotel.addEventListener("click", function () {});
