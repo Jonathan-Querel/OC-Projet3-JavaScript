@@ -1,9 +1,10 @@
 //Etape1 - Récupération de la section et création de la div qui englobe les boutons
 
 const mesProjets = document.querySelector("#portfolio");
+
 const divButton = document.createElement("div");
 divButton.classList.add("bouton");
-mesProjets.appendChild(divButton);
+
 const buttonTous = document.createElement("button");
 buttonTous.innerText = "Tous";
 buttonTous.classList.add("btn");
@@ -14,6 +15,7 @@ const dataCategory = (category) => {
   const buttonElement = document.createElement("button");
   buttonElement.innerText = category.name;
   buttonElement.classList.add("btn");
+  buttonElement.id = category.id;
   divButton.appendChild(buttonElement);
 };
 
@@ -71,11 +73,14 @@ const fetchWorks = async () => {
 fetchCategory();
 fetchWorks();
 
-const filtreObjets = document.querySelector("#btnObjets");
+const parentGallery = galleryContainer.parentNode;
+parentGallery.insertBefore(divButton, galleryContainer);
+
+const filtreObjets = document.querySelector("#1");
 filtreObjets.addEventListener("click", function () {});
 
-const filtreAppart = document.querySelector("btnAppart");
+const filtreAppart = document.querySelector("#2");
 filtreAppart.addEventListener("click", function () {});
 
-const filtreHotel = document.querySelector("btnHotel");
+const filtreHotel = document.querySelector("#3");
 filtreHotel.addEventListener("click", function () {});
