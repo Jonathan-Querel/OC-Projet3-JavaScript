@@ -1,12 +1,10 @@
 //Appel API pour les travaux
-const fetchWorks = async () => {
+const fetchAndReturnWorks = async () => {
   try {
     const response = await fetch("http://localhost:5678/api/works");
     const data = await response.json();
+    return data;
 
-    for (let i = 0; i < data.length; i++) {
-      dataWork(data[i]);
-    }
   } catch (error) {
     console.error("Il y a eu un problème : " + error);
   }
@@ -14,19 +12,33 @@ const fetchWorks = async () => {
 
 //Appel API pour les catégories
 const fetchCategory = async () => {
+  const defaultCategory = {id:0, name:"Tous"}
+  const allCategoriesList = new Set();
+  allCategoriesList.add(defaultCategory);
+
   try {
     const response = await fetch("http://localhost:5678/api/categories");
     const data = await response.json();
+
     for (let i = 0; i < data.length; i++) {
-      dataCategory(data[i]);
+      allCategoriesList.add(data[i])
     }
+    allCategoriesList.forEach(category => {
+        buildDOMCategory(category);
+    })
   } catch (error) {
     console.error("Il y a eu un problème : " + error);
   }
 };
 
+const fetchAndBuildWorks = async () => {
+    const listProjects = await fetchAndReturnWorks();
+    for (let i = 0; i < listProjects.length; i++) {
+     buildDOMWork(listProjects[i]);
+    }
+}
 //Construction du DOM pour les travaux
-const dataWork = (work) => {
+const buildDOMWork = (work) => {
   const figureElement = document.createElement("figure");
   const imgElement = document.createElement("img");
   imgElement.src = work.imageUrl;
@@ -58,11 +70,6 @@ parentGallery.insertBefore(divButton, galleryContainer);
 
 
 
-const defaultCategory = {id:0, name:"Tous"}
-const allCategoriesList = new Set();
-allCategoriesList.add(defaultCategory);
-
-
 //Filtres 
 
 const filteredProject = (categoryId, projets) => {
@@ -73,38 +80,43 @@ const filteredProject = (categoryId, projets) => {
       if (categoryId === 0) {
         return projet;
       }
-      return projet.category === categoryId
+      return projet.category.id === categoryId
       });
   //3 Je construit chaque projet en JS
-  projectsFiltered.forEach(work => dataWork(work));
+  projectsFiltered.forEach(work => buildDOMWork(work));
 };
 
 
 
-const dataCategory = () => {
-    const categoriesData = fetchCategory();
-    categoriesData.forEach(category => { //m'expliquer ?
-        allCategoriesList.add(category); //m'expliquer ?
-    })
-
-
-    allCategoriesList.forEach(category => {
+const buildDOMCategory = async (category) => {
+    const listProjects = await fetchAndReturnWorks();
+    //const categoriesData = fetchCategory();
+    //categoriesData.forEach(category => { //m'expliquer ?
+    //    allCategoriesList.add(category); //m'expliquer ?
+    //})
+    //allCategoriesList.forEach(category => {
         const buttonElement = document.createElement("button");
         buttonElement.innerText = category.name;
         buttonElement.classList.add("btn");
         buttonElement.id = category.id;
+        if (category.id === 0) {
+            buttonElement.classList.add("btnclique");
+        }
         divButton.appendChild(buttonElement);
         buttonElement.addEventListener("click", function () {
-            filteredProject(category.id, dataWork());
+            const allButtons = document.querySelectorAll(".btn");
+            allButtons.forEach(bt => bt.classList.remove("btnclique"))
+            buttonElement.classList.add("btnclique")
+            filteredProject(category.id, listProjects);
         });
-    })
-};
+    };
+
 
 
 //Appel des fonctions pour les boutons et les projets
 
 fetchCategory();
-fetchWorks();
+fetchAndBuildWorks();
 
 
 
