@@ -180,7 +180,7 @@ h2 {
 nav ul {
 	display: flex;
 	list-style-type: none;
-
+	align-items: center;
 }
 
 nav li {
@@ -190,6 +190,10 @@ nav li {
 
 li:hover {
 	color: #B1663C;
+}
+
+li a {
+	text-decoration: none;
 }
 
 #introduction {
@@ -351,7 +355,7 @@ footer nav ul {
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-#login input[type="button"] {
+#login input[type="submit"] {
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -372,7 +376,6 @@ a {
 	color: black;
 	display: flex;
 	justify-content: center;
-	margin-bottom: 350px;
 }
 
 li>img {
@@ -382,4 +385,43 @@ li>img {
 
 li>span {
 	font-weight: 600;
+}
+
+#changements {
+	background-color: #FFFFFF;
+	border-radius: 60px;
+	width: 220px;
+	height: 38px;
+	font-size: 14px;
+	font-weight: bold;
+	font-family: "Work Sans";
+	border-style: none;
+	margin-left: 20px;
+}
+
+body>p {
+	background-color: black;
+	height: 50px;
+	color: #FFFFFF;
+	font-size: 16px;
+	text-align: center;
+	padding-top: 10px;
+}
+
+#modifierdesigner {
+	padding-bottom: 20px;
+}
+
+#modifierimage {
+	display: block;
+	margin: auto;
+	width: 80%;
+	padding-top: 15px;
+}
+
+#modifierprojets {
+	color: black;
+	padding-left: 30px;
+	font-size: 14px;
+	display: inline;
 }

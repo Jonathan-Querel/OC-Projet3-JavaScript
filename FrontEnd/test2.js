@@ -119,12 +119,24 @@ fetchCategory();
 fetchAndBuildWorks();
 
 
+const authenticationFromLocalStorage = localStorage.getItem("user");
+const loginLink = document.querySelector("#login")
+const logoutLink = document.querySelector("#logout")
+const modeEdition = document.querySelector(".edition")
+const modeEdition1 = document.querySelector(".edition1")
+const divButton1 = document.querySelector(".bouton")
 
+if (authenticationFromLocalStorage) {
+  loginLink.style.display = "none"
+  logoutLink.style.display = "block"
+  modeEdition.style.display = "block"
+  modeEdition1.style.display = "block"
+  divButton1.style.display="none"
 
-
-//Construction du bouton TOUS
-//const buttonTous = document.createElement("button");
-//buttonTous.innerText = "Tous";
-//buttonTous.classList.add("btn");
-//divButton.appendChild(buttonTous);
-//const mesProjets = document.querySelector("#portfolio");
+} else {
+  loginLink.style.display = "block"
+  logoutLink.style.display = "none"
+  modeEdition.style.display = "none"
+  modeEdition1.style.display = "none"
+  divButton1.style.display="block"
+}
