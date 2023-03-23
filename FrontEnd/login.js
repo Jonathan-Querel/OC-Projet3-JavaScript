@@ -22,7 +22,7 @@ async function connexion(e) {
         )
 
         if (!responseLogin.ok) {
-            return alert("Erreur dans l'identifiant ou le mot de passe");
+            alert("Erreur dans l'identifiant ou le mot de passe");
         } else {
             const responseJson = await responseLogin.json();
             window.localStorage.setItem("user", JSON.stringify(responseJson));
@@ -31,3 +31,16 @@ async function connexion(e) {
     };
 
 baliseForm.addEventListener("submit", connexion)
+
+const authenticationFromLocalStorage = localStorage.getItem("user");
+const loginLink = document.querySelector("#login")
+const logoutLink = document.querySelector("#logout")
+
+if (authenticationFromLocalStorage) {
+    loginLink.style.display = "none"
+    logoutLink.style.display = "block"
+
+  } else {
+    loginLink.style.display = "block"
+    logoutLink.style.display = "none"
+  }
