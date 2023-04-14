@@ -1,3 +1,16 @@
+const authenticationFromLocalStorage = localStorage.getItem("user");
+const loginLink = document.querySelector("#login")
+const logoutLink = document.querySelector("#logout")
+
+if (authenticationFromLocalStorage) {
+    loginLink.style.display = "none"
+    logoutLink.style.display = "block"
+  } else {
+    loginLink.style.display = "block"
+    logoutLink.style.display = "none"
+  }
+
+
 const baliseForm = document.querySelector("form");
 
 
@@ -26,21 +39,12 @@ async function connexion(e) {
         } else {
             const responseJson = await responseLogin.json();
             window.localStorage.setItem("user", JSON.stringify(responseJson));
-            window.location.href = "index.html"
+            window.location.href = "test3.html"
         }
     };
 
 baliseForm.addEventListener("submit", connexion)
 
-const authenticationFromLocalStorage = localStorage.getItem("user");
-const loginLink = document.querySelector("#login")
-const logoutLink = document.querySelector("#logout")
-
-if (authenticationFromLocalStorage) {
-    loginLink.style.display = "none"
-    logoutLink.style.display = "block"
-
-  } else {
-    loginLink.style.display = "block"
-    logoutLink.style.display = "none"
-  }
+logoutLink.addEventListener("click", function() {
+    authenticationFromLocalStorage = localStorage.removeItem("user");
+})

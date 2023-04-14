@@ -137,8 +137,8 @@ if (authenticationFromLocalStorage) {
   loginLink.style.display = "none"
   logoutLink.style.display = "block"
   modeEdition.style.display = "block"
-  modeEdition1.style.display = "block"
-  modeEdition2.style.display = "block"
+  modeEdition1.style.display = "flex"
+  modeEdition2.style.display = "flex"
   modeEdition3.style.display = "inline-block"
   //modeEdition4.style.display = "block" DocumentQuerySelector ne fonctionne pas 
   divButton.style.display="none"
@@ -155,7 +155,42 @@ if (authenticationFromLocalStorage) {
 }
 
 logoutLink.addEventListener("click", function() { //a t'on besoin de le rajouter sur la page login vu que je reste sur la page projet quand je Logout
-  authenticationFromLocalStorage = localStorage.removeItem("user")
+  authenticationFromLocalStorage = localStorage.removeItem("user");
   //loginLink.style.display ="block" Comme le token est supprimé cela reprend la condition du dessus
   //logoutLink.style.display = "none" Donc pas besoin de rajouter ces lignes ?
+})
+
+let modal = null
+
+const openModal = function (e) {
+  e.preventDefault()
+  const target = document.querySelector(e.target.getAttribute("href"))
+  target.style.display = null
+  target.removeAttribute ('aria-hidden')
+  target.setAttribute ('aria-modal', 'true')
+  modal = target
+  modal.addEventListener ('click', closeModal)
+  modal.querySelector ('.js-modal-close').addEventListener('click', closeModal)
+  modal.querySelector ('.js-modal-stop').addEventListener('click', stopPropagation)
+
+}
+
+const closeModal = function (e) {
+  if (modal === null) return
+  e.preventDefault()
+  modal.style.display= "none"
+  modal.setAttribute ('aria-hidden', 'true')
+  modal.removeAttribute ('aria-modal')
+  modal.removeEventListener ('click', closeModal)
+  modal.querySelector ('.js-modal-close').removeEventListener('click', closeModal)
+  modal.querySelector ('.js-modal-stop').removeEventListener('click', stopPropagation)
+  modal = null
+}
+
+const stopPropagation = function(e) {
+  e.stopPropagation()
+}
+
+document.querySelectorAll(".js-modal").forEach(a => {
+  a.addEventListener("click", openModal)
 })

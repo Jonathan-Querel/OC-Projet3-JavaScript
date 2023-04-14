@@ -410,18 +410,105 @@ body>p {
 
 #modifierdesigner {
 	padding-bottom: 20px;
+	justify-content: space-between;
+	width: 110px;
 }
 
 #modifierimage {
-	display: block;
-	margin: auto;
-	width: 80%;
+	padding-left: 60px;
+	width: 110px;
 	padding-top: 15px;
+	justify-content: space-between;
+}
+
+h2>i {
+	color: black;
+	font-size: 14px;
+	padding-left: 30px;
 }
 
 #modifierprojets {
 	color: black;
-	padding-left: 20px;
+	font-family: "Work Sans";
+	font-weight: 400;
 	padding-bottom: 100px;
 	font-size: 14px;
+}
+
+.modal {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.3);
+}
+
+.modal-wrapper {
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	width: 630px;
+	margin-top: 600px;
+	padding: 20px;
+	background-color: #fff;
+}
+
+.js-modal {
+	text-decoration: none;
+	justify-content: space-between;
+	width: 85px;
+}
+
+#buttonAdd {
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	text-align: center;
+	border-radius: 60px;
+	margin-top: 40px;
+	padding: 10px 50px 10px 50px;
+	border-style: none;
+	margin-left: 25%;
+	margin-right: 25%;
+}
+
+#buttonDelete {
+	font-size: 14px;
+	font-weight: 400;
+	color: red;
+	margin-top: 20px;
+	background-color: #FFFFFF;
+	text-align: center;
+	border-radius: 60px;
+	padding: 10px 50px 10px 50px;
+	border-style: none;
+	margin-left: 25%;
+	margin-right: 25%;
+}
+
+#titlemodal {
+	font-family: "Work Sans";
+	font-size: 26px;
+	font-weight: 400;
+	text-align: center;
+	color: black;
+	margin-top: 15px;
+}
+
+.js-modal-close {
+	border-style: none;
+	background-color: #FFFFFF;
+	font-size: 15px;
+	align-self: flex-end;
+	margin-right: 30px;
+}
+
+.modalimg>img {
+	width: 80px;
+	height: 140px;
 }
