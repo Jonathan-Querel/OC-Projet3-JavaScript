@@ -39,7 +39,7 @@ async function connexion(e) {
         } else {
             const responseJson = await responseLogin.json();
             window.localStorage.setItem("user", JSON.stringify(responseJson));
-            window.location.href = "test3.html"
+            window.location.href = "index.html"
         }
     };
 
