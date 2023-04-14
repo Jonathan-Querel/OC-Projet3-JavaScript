@@ -40,6 +40,7 @@ const fetchAndBuildWorks = async () => {
     const listProjects = await fetchAndReturnWorks();
     for (let i = 0; i < listProjects.length; i++) {
      buildDOMWork(listProjects[i]);
+     buildModalWork(listProjects[i]);
     }
 }
 //Construction du DOM pour les travaux
@@ -55,6 +56,21 @@ const buildDOMWork = (work) => {
   figureElement.appendChild(figcaptionElement);
 
   galleryContainer.appendChild(figureElement);
+};
+
+const buildModalWork = (work) => {
+  const figureElement = document.createElement("figure");
+  const imgElement = document.createElement("img");
+  imgElement.src = work.imageUrl;
+  imgElement.alt = work.title;
+  const figcaptionElement = document.createElement("figcaption");
+  figcaptionElement.innerText = work.title;
+  //Rattachement des balises au DOM
+  figureElement.appendChild(imgElement);
+  figureElement.appendChild(figcaptionElement);
+
+  const modalContainer = document.getElementById("modalcontainer")
+  modalContainer.appendChild(figureElement)
 };
 
 
@@ -128,30 +144,36 @@ const authenticationFromLocalStorage = localStorage.getItem("user");
 const loginLink = document.querySelector("#login")
 const logoutLink = document.querySelector("#logout")
 const modeEdition = document.querySelector(".edition")
-const modeEdition1 = document.querySelector(".edition1")
-const modeEdition2 = document.querySelector(".edition2")
-const modeEdition3 = document.querySelector(".edition3")
+const modeEdition1 = document.querySelectorAll(".edition1")
+//const modeEdition2 = document.querySelector(".edition2")
+//const modeEdition3 = document.querySelector(".edition3")
 //const modeEdition4 = document.querySelectorAll(".edition4") DocumentQuerySelector ne fonctionne pas 
 
 if (authenticationFromLocalStorage) {
   loginLink.style.display = "none"
   logoutLink.style.display = "block"
   modeEdition.style.display = "block"
-  modeEdition1.style.display = "flex"
-  modeEdition2.style.display = "flex"
-  modeEdition3.style.display = "inline-block"
+  //modeEdition1.style.display = "flex"
+  //modeEdition2.style.display = "flex"
+  //modeEdition3.style.display = "inline-block"
   //modeEdition4.style.display = "block" DocumentQuerySelector ne fonctionne pas 
   divButton.style.display="none"
+  modeEdition1.forEach(element => {
+    element.style.display = "flex"
+  })
 
 } else {
   loginLink.style.display = "block"
   logoutLink.style.display = "none"
   modeEdition.style.display = "none"
-  modeEdition1.style.display = "none"
-  modeEdition2.style.display = "none"
-  modeEdition3.style.display = "none"
+  //modeEdition1.style.display = "none"
+  //modeEdition2.style.display = "none"
+  //modeEdition3.style.display = "none"
   //modeEdition4.style.display = "none" DocumentQuerySelector ne fonctionne pas 
   divButton.style.display="flex"
+  modeEdition1.forEach(element => {
+    element.style.display = "none"
+  })
 }
 
 logoutLink.addEventListener("click", function() { //a t'on besoin de le rajouter sur la page login vu que je reste sur la page projet quand je Logout
