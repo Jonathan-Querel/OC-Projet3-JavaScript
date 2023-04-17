@@ -1,4 +1,20 @@
-
+const fetchRemoveWorks = async (id) => {
+  try { 
+    await fetch (`http://localhost:5678/api/works/${id}`,
+    {
+      method:"DELETE",
+      body: JSON.stringify({id:id}),
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + JSON.parse(authenticationFromLocalStorage).token
+        }
+  })
+    .then(reponse => reponse.json())//pas obligatoire
+    .then(data => console.log(data))//pas obligatoire
+  } catch (error) {
+    console.error("Il y a eu un problème : " + error);
+  }
+}
 
 
 
@@ -87,11 +103,13 @@ const buildModalWork = (work) => {
   const modalContainer = document.getElementById("modalcontainer")
   modalContainer.appendChild(figureElement)
   modalContainer.classList.add("modalcontainer")
-
+  divTrash.dataset.id=work.id
   divTrash.addEventListener('click', ()=>{
-    console.log(this)
+    //console.log(divTrash.dataset.id)
+    fetchRemoveWorks(divTrash.dataset.id)
   })
 };
+
 
 
 //Récupération de la class gallery dans une constante
