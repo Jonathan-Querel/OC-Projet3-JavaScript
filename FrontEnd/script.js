@@ -61,10 +61,23 @@ const buildDOMWork = (work) => {
 const buildModalWork = (work) => {
   const figureElement = document.createElement("figure");
   figureElement.classList.add("modalfigure")
+  const divArrow = document.createElement ("div")
+  divArrow.classList.add ("iconearrow")
+  figureElement.appendChild(divArrow)
+  const divTrash = document.createElement ("div")
+  divTrash.classList.add ("iconetrash")
+  figureElement.appendChild(divTrash)
+  const iconeArrow = document.createElement ("i")
+  iconeArrow.classList.add ('fa-solid','fa-arrows-up-down-left-right')
+  divArrow.appendChild(iconeArrow)
+  const iconeTrash = document.createElement ("i")
+  iconeTrash.classList.add ('fa-solid','fa-trash-can')
+  divTrash.appendChild(iconeTrash)
   const imgElement = document.createElement("img");
   imgElement.src = work.imageUrl;
   imgElement.alt = work.title;
   imgElement.classList.add("modalimage")
+
   const figcaptionElement = document.createElement("figcaption");
   figcaptionElement.innerHTML = "éditer";
   //Rattachement des balises au DOM
@@ -74,6 +87,10 @@ const buildModalWork = (work) => {
   const modalContainer = document.getElementById("modalcontainer")
   modalContainer.appendChild(figureElement)
   modalContainer.classList.add("modalcontainer")
+
+  divTrash.addEventListener('click', ()=>{
+    console.log(this)
+  })
 };
 
 
