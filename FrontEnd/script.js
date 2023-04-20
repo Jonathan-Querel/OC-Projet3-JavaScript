@@ -246,6 +246,23 @@ document.querySelectorAll(".js-modal").forEach(a => {
   a.addEventListener("click", openModal)
 })
 
+document.querySelectorAll(".js-modal3").forEach(button => {
+  button.addEventListener("click", openModal)
+})
+
 document.querySelectorAll(".js-modal2").forEach(a => {
   a.addEventListener("click", openModal)
 })
+
+                      //FormData
+
+const formAjoutProjet = document.querySelector("form") //On aurait pu mettre la classe ? 
+formAjoutProjet.addEventListener("submit", ajoutProjet)
+
+function ajoutProjet(e){
+  e.prevendDefault()
+  const formData = new FormData(formAjoutProjet)
+  const file = formData.get("file")
+  const titre = formData.get("titre")
+  const categorie = formData.get("categorie")
+}
