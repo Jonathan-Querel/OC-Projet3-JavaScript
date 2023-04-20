@@ -53,7 +53,7 @@
 		</section>
 		<section id="portfolio">
 			<h2>Mes Projets<p class="edition1" id="modifierprojets"><i class="fa-regular fa-pen-to-square"></i><a
-						href="#modal2" class="js-modal2"> modifier</a></p>
+						href="#modal1" class="js-modal"> modifier</a></p>
 			</h2>
 
 			<!--<div id="bouton">
@@ -142,7 +142,7 @@
 		<aside id="modal2" class="modalajoutprojet" aria-hidden="true" role="dialog" aria-labelledby="titlemodal"
 			style="display: none;">
 
-			<div class="modal-wrapper js-modal-stop">
+			<div class="modal-wrapper2 js-modal-stop">
 
 				<div class="iconemodal2">
 					<button class="js-modal-return"><i class="fa-solid fa-arrow-left-long"></i></button>
@@ -154,11 +154,8 @@
 					<form action="#" method="post" class="formulairemodal">
 						<div class="champfile">
 							<i class="fa-sharp fa-regular fa-image"></i>
-							<button class="js-modal3" id="buttonAdd"
-								onclick="document.getElementById('getFile').click()">Ajouter
-								une photo</button>
-							<input type="file" id="getFile" name="file" value="Ajouter photo" style="display:none"
-								required>
+							<button onclick="document.getElementById('getFile').click()">+ Ajouter photo</button>
+							<input type="file" id="getFile" name="file" required>
 							<label for="file" id="file">jpg, png : 4mo max</label>
 						</div>
 						<label for="titre">Titre</label>

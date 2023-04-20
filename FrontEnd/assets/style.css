@@ -462,6 +462,17 @@ h2>i {
 	border-radius: 10px;
 }
 
+.modal-wrapper2 {
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	width: 630px;
+	height: 630px;
+	padding: 20px;
+	background-color: #FFFFFF;
+	border-radius: 10px;
+}
+
 .js-modal {
 	text-decoration: none;
 	justify-content: space-between;
@@ -470,16 +481,14 @@ h2>i {
 
 #buttonAdd {
 	font-family: 'Syne';
-	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	text-align: center;
 	border-radius: 60px;
 	margin-top: 40px;
 	padding: 10px 50px 10px 50px;
-	border-style: none;
-	margin-left: 25%;
-	margin-right: 25%;
+	width: 240px;
+	justify-content: center;
+	margin-left: 150px;
 }
 
 
@@ -493,8 +502,8 @@ h2>i {
 	border-radius: 60px;
 	padding: 10px 50px 10px 50px;
 	border-style: none;
-	margin-left: 25%;
-	margin-right: 25%;
+	margin-left: 200px;
+	width: 240px;
 }
 
 #titlemodal {
@@ -629,7 +638,7 @@ form.formulairemodal select {
 	margin-right: 100px;
 }
 
-.modal-wrapper input[type="submit"] {
+.modal-wrapper2 input[type="submit"] {
 	background-color: #A7A7A7;
 	font-family: "syne";
 	border-radius: 60px;
@@ -670,4 +679,8 @@ form.formulairemodal select {
 	font-size: 10px;
 	font-family: "Work Sans";
 	padding-top: 5px;
+}
+
+#getFile {
+	display: none;
 }
