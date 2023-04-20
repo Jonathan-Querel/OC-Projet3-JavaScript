@@ -233,7 +233,7 @@ const closeModal = function (e) {
   modal.setAttribute ('aria-hidden', 'true')
   modal.removeAttribute ('aria-modal')
   modal.removeEventListener ('click', closeModal)
-  modal.querySelector ('.js-modal-close').removeEventListener('click', closeModal)
+  modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
   modal.querySelector ('.js-modal-stop').removeEventListener('click', stopPropagation)
   modal = null
 }
@@ -244,10 +244,6 @@ const stopPropagation = function(e) {
 
 document.querySelectorAll(".js-modal").forEach(a => {
   a.addEventListener("click", openModal)
-})
-
-document.querySelectorAll(".js-modal3").forEach(button => {
-  button.addEventListener("click", openModal)
 })
 
 document.querySelectorAll(".js-modal2").forEach(a => {

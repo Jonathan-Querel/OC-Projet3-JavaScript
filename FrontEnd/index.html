@@ -133,7 +133,7 @@
 
 				<h1 id="titlemodal">Galerie photo</h1>
 				<div class="modalimg" id="modalcontainer"></div>
-				<button class="js-modal3" id="buttonAdd">Ajouter une photo</button>
+				<a href="#modal2" class="js-modal2 addBouton" id="buttonAdd">Ajouter une photo</a>
 				<button id="buttonDelete">Supprimer la galerie</button>
 
 			</div>
@@ -154,8 +154,11 @@
 					<form action="#" method="post" class="formulairemodal">
 						<div class="champfile">
 							<i class="fa-sharp fa-regular fa-image"></i>
-							<button class="btn-upload"><input type="file" id="inputfile" name="file">+ Ajouter
-								photo</button>
+							<button class="js-modal3" id="buttonAdd"
+								onclick="document.getElementById('getFile').click()">Ajouter
+								une photo</button>
+							<input type="file" id="getFile" name="file" value="Ajouter photo" style="display:none"
+								required>
 							<label for="file" id="file">jpg, png : 4mo max</label>
 						</div>
 						<label for="titre">Titre</label>
