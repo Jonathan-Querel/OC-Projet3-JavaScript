@@ -296,6 +296,7 @@ footer nav ul {
 }
 
 .btn {
+	font-family: "Syne";
 	background-color: #FFFFFF;
 	color: #1D6154;
 	font-size: 19px;
@@ -365,6 +366,7 @@ footer nav ul {
 	border-radius: 60px;
 	width: 200px;
 	margin-left: 95px;
+	margin-top: 50px;
 }
 
 #login label {
@@ -485,25 +487,25 @@ h2>i {
 	background-color: #1D6154;
 	border-radius: 60px;
 	margin-top: 40px;
-	padding: 10px 50px 10px 50px;
-	width: 240px;
+	padding: 10px 30px 10px 30px;
+	width: 180px;
 	justify-content: center;
-	margin-left: 150px;
+	margin-left: 200px;
 }
 
 
 #buttonDelete {
+	font-family: "Syne";
 	font-size: 14px;
 	font-weight: 400;
-	color: red;
+	color: #D65353;
 	margin-top: 20px;
 	background-color: #FFFFFF;
-	text-align: center;
 	border-radius: 60px;
 	padding: 10px 50px 10px 50px;
 	border-style: none;
-	margin-left: 200px;
-	width: 240px;
+	margin-left: 190px;
+	width: 260px;
 }
 
 #titlemodal {
@@ -527,7 +529,7 @@ h2>i {
 	display: flex;
 	margin-left: 100px;
 	margin-right: 100px;
-	padding-top: 50px;
+	padding-top: 30px;
 	flex-wrap: wrap;
 	border-bottom: 1px solid#B3B3B3;
 	padding-bottom: 50px;

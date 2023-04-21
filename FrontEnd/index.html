@@ -15,10 +15,12 @@
 </head>
 
 <body>
+
 	<p class="edition"><i class="fa-regular fa-pen-to-square"></i> Mode édition
 		<button id="changements">publier les
 			changements</button>
 	</p>
+
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 		<nav>
@@ -31,16 +33,20 @@
 			</ul>
 		</nav>
 	</header>
+
 	<main>
+
 		<section id="introduction">
+
 			<figure>
 				<img src="./assets/images/sophie-bluel.png" alt="">
 				<p class="edition1" id="modifierimage"><i class="fa-regular fa-pen-to-square"></i><a href="#modal1"
 						class="js-modal">modifier</a></p>
 			</figure>
+
 			<article>
 				<p class="edition1" id="modifierdesigner"><i class="fa-regular fa-pen-to-square"></i><a href="#modal1"
-						class="js-modal"> modifier</a></p>
+						class="js-modal">modifier</a></p>
 				<h2>Designer d'espace</h2>
 				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
 					finale du chantier.</p>
@@ -50,18 +56,14 @@
 				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
 					décorateur(trice)</p>
 			</article>
+
 		</section>
+
 		<section id="portfolio">
 			<h2>Mes Projets<p class="edition1" id="modifierprojets"><i class="fa-regular fa-pen-to-square"></i><a
-						href="#modal1" class="js-modal"> modifier</a></p>
+						href="#modal1" class="js-modal">modifier</a></p>
 			</h2>
 
-			<!--<div id="bouton">
-			<button class="btn" id="btn1">Tous</button>
-			<button class="btn" id="btn2">Objets</button>
-			<button class="btn" id="btn3">Appartements</button>
-			<button class="btn" id="btn4">Hôtels & Restaurants</button>
-		</div> -->
 			<div class="gallery">
 				<figure>
 					<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
@@ -109,6 +111,7 @@
 				</figure>
 			</div>
 		</section>
+
 		<section id="contact">
 			<h2>Contact</h2>
 			<p>Vous avez un projet ? Discutons-en !</p>
@@ -124,6 +127,10 @@
 		</section>
 
 
+		<!--Modales-->
+
+		<!--Modal 1-->
+
 		<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal"
 			style="display: none;">
 
@@ -137,7 +144,10 @@
 				<button id="buttonDelete">Supprimer la galerie</button>
 
 			</div>
+
 		</aside>
+
+		<!--Modal 2-->
 
 		<aside id="modal2" class="modalajoutprojet" aria-hidden="true" role="dialog" aria-labelledby="titlemodal"
 			style="display: none;">
@@ -150,14 +160,17 @@
 				</div>
 
 				<h1 id="titlemodal">Ajout photo</h1>
+
 				<div class="formulaire2">
 					<form action="#" method="post" class="formulairemodal">
+
 						<div class="champfile">
 							<i class="fa-sharp fa-regular fa-image"></i>
 							<button onclick="document.getElementById('getFile').click()">+ Ajouter photo</button>
 							<input type="file" id="getFile" name="file" required>
 							<label for="file" id="file">jpg, png : 4mo max</label>
 						</div>
+
 						<label for="titre">Titre</label>
 						<input type="text" name="titre" id="titre" required />
 						<label for="categorie">Catégorie</label>
@@ -168,9 +181,10 @@
 							<option value="hotelrestaurant">Hôtels & Restaurants</option>
 						</select>
 				</div>
-				<input type="submit" value="Valider">
-				</form>
 
+				<input type="submit" value="Valider">
+
+				</form>
 		</aside>
 
 	</main>
@@ -182,7 +196,9 @@
 			</ul>
 		</nav>
 	</footer>
+
 	<script src="script.js"></script>
+
 </body>
 
 </html>
