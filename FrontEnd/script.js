@@ -233,8 +233,8 @@ const closeModal = function (e) {
   modal.setAttribute ('aria-hidden', 'true')
   modal.removeAttribute ('aria-modal')
   modal.removeEventListener ('click', closeModal)
-  modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
-  modal.querySelector ('.js-modal-stop').removeEventListener('click', stopPropagation)
+  //modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
+  //modal.querySelector ('.js-modal-stop').removeEventListener('click', stopPropagation)
   modal = null
 }
 
@@ -248,17 +248,67 @@ document.querySelectorAll(".js-modal").forEach(a => {
 
 document.querySelectorAll(".js-modal2").forEach(a => {
   a.addEventListener("click", openModal)
+  a.addEventListener("click", () => {
+    const modal1 = document.querySelector("#modal1")
+    modal1.style.display="none"
+  })
 })
 
-                      //FormData
-
-const formAjoutProjet = document.querySelector("form") //On aurait pu mettre la classe ? 
-formAjoutProjet.addEventListener("submit", ajoutProjet)
-
-function ajoutProjet(e){
-  e.prevendDefault()
-  const formData = new FormData(formAjoutProjet)
-  const file = formData.get("file")
-  const titre = formData.get("titre")
-  const categorie = formData.get("categorie")
+document.querySelector(".js-modal-return").addEventListener("click", () => {
+  const modal2 = document.querySelector("#modal2")
+  modal2.style.display="none"
+  const modal1 = document.querySelector("#modal1")
+  modal1.style.display="flex"
+  modal1.querySelector ('.js-modal-close').addEventListener('click', () => {
+    modal1.style.display="none"
+  })
 }
+)
+
+                      //FormData
+const uploadForm = document.getElementById("uploadForm")
+const imageFile = document.getElementById("imageFile")
+imageFile.onchange = e => {
+  const [file] = imageFile.files
+  if (file) {
+    votreImg.src=URL.createObjectURL(file)
+  }
+}
+
+
+
+
+
+uploadForm.addEventListener('submit', (e) => {
+  e.preventDefault()
+
+  const formData = new FormData();
+  const titre = document.getElementById("titre").value
+  const categorie = document.getElementById("categorie").value
+  formData.append('image', imageFile.files[0]);
+
+  formData.append('title', titre)
+  formData.append('category', categorie)
+  
+  fetch("http://localhost:5678/api/works", {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => {
+    console.log(response);
+  })
+  .catch(error => {
+    console.error(error);
+  });
+});
+
+//const formAjoutProjet = document.querySelector("form") //On aurait pu mettre la classe ? 
+//formAjoutProjet.addEventListener("submit", ajoutProjet)
+
+//function ajoutProjet(e){
+//  e.prevendDefault()
+// const formData = new FormData(formAjoutProjet)
+//  const file = formData.get("file")
+//  const titre = formData.get("titre")
+//  const categorie = formData.get("categorie")
+//}

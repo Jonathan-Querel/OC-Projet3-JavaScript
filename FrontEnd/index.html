@@ -164,11 +164,16 @@
 				<div class="formulaire2">
 					<form action="#" method="post" class="formulairemodal">
 
-						<div class="champfile">
-							<i class="fa-sharp fa-regular fa-image"></i>
-							<button onclick="document.getElementById('getFile').click()">+ Ajouter photo</button>
+						<div id="uploadForm">
+							<!--<i class="fa-sharp fa-regular fa-image"></i>-->
+							<img src="./assets/icons/placeholder.png" alt="placeholder" id="votreImg"
+								class="votreImg" />
+							<input accept="image/*" type="file" id="imageFile" name="imageFile" required>
+							<button type="submit">+ Ajouter photo</button>
+							<label for="imageFile" id="file">jpg, png : 4mo max</label>
+							<!--						<button onclick="document.getElementById('getFile').click()">+ Ajouter photo</button>
 							<input type="file" id="getFile" name="file" required>
-							<label for="file" id="file">jpg, png : 4mo max</label>
+							<label for="file" id="file">jpg, png : 4mo max</label>-->
 						</div>
 
 						<label for="titre">Titre</label>
