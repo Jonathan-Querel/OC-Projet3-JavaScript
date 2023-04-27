@@ -127,8 +127,6 @@ divButton.classList.add("bouton");
 const parentGallery = galleryContainer.parentNode;
 parentGallery.insertBefore(divButton, galleryContainer);
 
-
-
 //Filtres 
 
 const filteredProject = (categoryId, projets) => {
