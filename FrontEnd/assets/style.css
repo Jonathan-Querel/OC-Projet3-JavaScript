@@ -649,7 +649,7 @@ form.formulairemodal select {
 	border-style: none;
 }
 
-#uploadForm {
+#divForm {
 	display: flex;
 	flex-direction: column;
 	width: 420px;
@@ -658,13 +658,13 @@ form.formulairemodal select {
 	align-items: center;
 }
 
-#uploadForm i {
+#divForm i {
 	padding-top: 25px;
 	color: #B9C5CC;
 	font-size: 50px;
 }
 
-#uploadForm button {
+#divForm button {
 	background-color: #CBD6DC;
 	border-radius: 50px;
 	border-style: none;
@@ -676,16 +676,17 @@ form.formulairemodal select {
 	font-weight: bold;
 }
 
-#uploadForm label#file {
+#divForm label#file {
 	color: #444444;
 	font-size: 10px;
 	font-family: "Work Sans";
 	padding-top: 5px;
 }
 
-/*#uploadForm input#imageFile {
-	display: none;
-}*/
+#imageFile {
+	width: 1px;
+	height: 1px;
+}
 
 .votreImg {
 	width: 50px;

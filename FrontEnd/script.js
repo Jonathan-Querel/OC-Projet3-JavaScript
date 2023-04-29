@@ -1,16 +1,19 @@
+document.getElementById("modal1").style.display = "none";
+document.getElementById("modal2").style.display = "none";
+
 const fetchRemoveWorks = async (id) => {
-  try { 
-    await fetch (`http://localhost:5678/api/works/${id}`,
-    {
-      method:"DELETE",
-      body: JSON.stringify({id:id}),
-      headers: {
+  try {
+    await fetch(`http://localhost:5678/api/works/${id}`,
+      {
+        method: "DELETE",
+        body: JSON.stringify({ id: id }),
+        headers: {
           "Content-Type": "application/json",
           "Authorization": "Bearer " + JSON.parse(authenticationFromLocalStorage).token
         }
-  })
-    .then(reponse => reponse.json())//pas obligatoire
-    .then(data => console.log(data))//pas obligatoire
+      })
+      .then(reponse => reponse.json())//pas obligatoire
+      .then(data => console.log(data))//pas obligatoire
   } catch (error) {
     console.error("Il y a eu un problème : " + error);
   }
@@ -32,7 +35,7 @@ const fetchAndReturnWorks = async () => {
 
 //Appel API pour les catégories
 const fetchCategory = async () => {
-  const defaultCategory = {id:0, name:"Tous"}
+  const defaultCategory = { id: 0, name: "Tous" }
   const allCategoriesList = new Set();
   allCategoriesList.add(defaultCategory);
 
@@ -45,7 +48,7 @@ const fetchCategory = async () => {
     }
     console.log(allCategoriesList)
     allCategoriesList.forEach(async (category) => {
-        await buildDOMCategory(category);
+      await buildDOMCategory(category);
     })
   } catch (error) {
     console.error("Il y a eu un problème : " + error);
@@ -53,11 +56,11 @@ const fetchCategory = async () => {
 };
 
 const fetchAndBuildWorks = async () => {
-    const listProjects = await fetchAndReturnWorks();
-    for (let i = 0; i < listProjects.length; i++) {
-     buildDOMWork(listProjects[i]);
-     buildModalWork(listProjects[i]);
-    }
+  const listProjects = await fetchAndReturnWorks();
+  for (let i = 0; i < listProjects.length; i++) {
+    buildDOMWork(listProjects[i]);
+    buildModalWork(listProjects[i]);
+  }
 }
 //Construction du DOM pour les travaux
 const buildDOMWork = (work) => {
@@ -77,17 +80,17 @@ const buildDOMWork = (work) => {
 const buildModalWork = (work) => {
   const figureElement = document.createElement("figure");
   figureElement.classList.add("modalfigure")
-  const divArrow = document.createElement ("div")
-  divArrow.classList.add ("iconearrow")
+  const divArrow = document.createElement("div")
+  divArrow.classList.add("iconearrow")
   figureElement.appendChild(divArrow)
-  const divTrash = document.createElement ("div")
-  divTrash.classList.add ("iconetrash")
+  const divTrash = document.createElement("div")
+  divTrash.classList.add("iconetrash")
   figureElement.appendChild(divTrash)
-  const iconeArrow = document.createElement ("i")
-  iconeArrow.classList.add ('fa-solid','fa-arrows-up-down-left-right')
+  const iconeArrow = document.createElement("i")
+  iconeArrow.classList.add('fa-solid', 'fa-arrows-up-down-left-right')
   divArrow.appendChild(iconeArrow)
-  const iconeTrash = document.createElement ("i")
-  iconeTrash.classList.add ('fa-solid','fa-trash-can')
+  const iconeTrash = document.createElement("i")
+  iconeTrash.classList.add('fa-solid', 'fa-trash-can')
   divTrash.appendChild(iconeTrash)
   const imgElement = document.createElement("img");
   imgElement.src = work.imageUrl;
@@ -103,8 +106,9 @@ const buildModalWork = (work) => {
   const modalContainer = document.getElementById("modalcontainer")
   modalContainer.appendChild(figureElement)
   modalContainer.classList.add("modalcontainer")
-  divTrash.dataset.id=work.id
-  divTrash.addEventListener('click', ()=>{
+  divTrash.dataset.id = work.id
+  divTrash.addEventListener('click', (event) => {
+    event.preventDefault();
     //console.log(divTrash.dataset.id)
     fetchRemoveWorks(divTrash.dataset.id)
   })
@@ -134,11 +138,11 @@ const filteredProject = (categoryId, projets) => {
   document.querySelector(".gallery").innerHTML = "";
   //2 Je filtre les projets par rapport à leur catégorie
   const projectsFiltered = projets.filter(projet => {
-      if (categoryId === 0) {
-        return projet;
-      }
-      return projet.category.id === categoryId
-      });
+    if (categoryId === 0) {
+      return projet;
+    }
+    return projet.category.id === categoryId
+  });
   //3 Je construit chaque projet en JS
   projectsFiltered.forEach(work => buildDOMWork(work));
 };
@@ -146,27 +150,34 @@ const filteredProject = (categoryId, projets) => {
 
 
 const buildDOMCategory = async (category) => {
-    const listProjects = await fetchAndReturnWorks();
-    //const categoriesData = fetchCategory();
-    //categoriesData.forEach(category => { //m'expliquer ?
-    //    allCategoriesList.add(category); //m'expliquer ?
-    //})
-    //allCategoriesList.forEach(category => {
-        const buttonElement = document.createElement("button");
-        buttonElement.innerText = category.name;
-        buttonElement.classList.add("btn");
-        buttonElement.id = category.id;
-        if (category.id === 0) {
-            buttonElement.classList.add("btnclique");
-        }
-        divButton.appendChild(buttonElement);
-        buttonElement.addEventListener("click", function () {
-            const allButtons = document.querySelectorAll(".btn");
-            allButtons.forEach(bt => bt.classList.remove("btnclique"))
-            buttonElement.classList.add("btnclique")
-            filteredProject(category.id, listProjects);
-        });
-    };
+  const listProjects = await fetchAndReturnWorks();
+  //const categoriesData = fetchCategory();
+  //categoriesData.forEach(category => { //m'expliquer ?
+  //    allCategoriesList.add(category); //m'expliquer ?
+  //})
+  //allCategoriesList.forEach(category => {
+  const buttonElement = document.createElement("button");
+  buttonElement.innerText = category.name;
+  buttonElement.classList.add("btn");
+  buttonElement.id = category.id;
+  if (category.id === 0) {
+    buttonElement.classList.add("btnclique");
+  }
+  divButton.appendChild(buttonElement);
+  buttonElement.addEventListener("click", function () {
+    const allButtons = document.querySelectorAll(".btn");
+    allButtons.forEach(bt => bt.classList.remove("btnclique"))
+    buttonElement.classList.add("btnclique")
+    filteredProject(category.id, listProjects);
+  });
+  if (category.id !== 0) { // Tous = 0
+    const selectCategories = document.getElementById("categorie")
+    const option = document.createElement("option")
+    option.value = category.id
+    option.innerText = category.name
+    selectCategories.appendChild(option)
+  }
+};
 
 
 
@@ -181,29 +192,29 @@ const loginLink = document.querySelector("#login")
 const logoutLink = document.querySelector("#logout")
 const modeEdition = document.querySelector(".edition")
 const modeEdition1 = document.querySelectorAll(".edition1")
-const modeEditionTest = document.querySelector ("#modifierprojets") //changement fait pour qu'il soit à coter de Mes projets
+const modeEditionTest = document.querySelector("#modifierprojets") //changement fait pour qu'il soit à coter de Mes projets
 
 if (authenticationFromLocalStorage) {
   loginLink.style.display = "none"
   logoutLink.style.display = "block"
   modeEdition.style.display = "block"
-  divButton.style.display="none"
+  divButton.style.display = "none"
   modeEdition1.forEach(element => {
-      element.style.display = "flex"
-    })
-    modeEditionTest.style.display = "inline-flex" //changement fait pour qu'il soit à coter de Mes projets
+    element.style.display = "flex"
+  })
+  modeEditionTest.style.display = "inline-flex" //changement fait pour qu'il soit à coter de Mes projets
 
 } else {
   loginLink.style.display = "block"
   logoutLink.style.display = "none"
   modeEdition.style.display = "none"
-  divButton.style.display="flex"
+  divButton.style.display = "flex"
   modeEdition1.forEach(element => {
-      element.style.display = "none"
-    })
+    element.style.display = "none"
+  })
 }
 
-logoutLink.addEventListener("click", function() { //a t'on besoin de le rajouter sur la page login vu que je reste sur la page projet quand je Logout
+logoutLink.addEventListener("click", function () { //a t'on besoin de le rajouter sur la page login vu que je reste sur la page projet quand je Logout
   authenticationFromLocalStorage = localStorage.removeItem("user");
   //loginLink.style.display ="block" Comme le token est supprimé cela reprend la condition du dessus
   //logoutLink.style.display = "none" Donc pas besoin de rajouter ces lignes ?
@@ -215,28 +226,28 @@ const openModal = function (e) {
   e.preventDefault()
   const target = document.querySelector(e.target.getAttribute("href"))
   target.style.display = null
-  target.removeAttribute ('aria-hidden')
-  target.setAttribute ('aria-modal', 'true')
+  target.removeAttribute('aria-hidden')
+  target.setAttribute('aria-modal', 'true')
   modal = target
-  modal.addEventListener ('click', closeModal)
-  modal.querySelector ('.js-modal-close').addEventListener('click', closeModal)
-  modal.querySelector ('.js-modal-stop').addEventListener('click', stopPropagation)
+  modal.addEventListener('click', closeModal)
+  modal.querySelector('.js-modal-close').addEventListener('click', closeModal)
+  modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 
 }
 
 const closeModal = function (e) {
   if (modal === null) return
   e.preventDefault()
-  modal.style.display= "none"
-  modal.setAttribute ('aria-hidden', 'true')
-  modal.removeAttribute ('aria-modal')
-  modal.removeEventListener ('click', closeModal)
+  modal.style.display = "none"
+  modal.setAttribute('aria-hidden', 'true')
+  modal.removeAttribute('aria-modal')
+  modal.removeEventListener('click', closeModal)
   //modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
   //modal.querySelector ('.js-modal-stop').removeEventListener('click', stopPropagation)
   modal = null
 }
 
-const stopPropagation = function(e) {
+const stopPropagation = function (e) {
   e.stopPropagation()
 }
 
@@ -248,28 +259,36 @@ document.querySelectorAll(".js-modal2").forEach(a => {
   a.addEventListener("click", openModal)
   a.addEventListener("click", () => {
     const modal1 = document.querySelector("#modal1")
-    modal1.style.display="none"
+    modal1.style.display = "none"
   })
+})
+
+document.getElementById("ajoutImg").addEventListener("click", () => {
+  document.getElementById("imageFile").click()
 })
 
 document.querySelector(".js-modal-return").addEventListener("click", () => {
   const modal2 = document.querySelector("#modal2")
-  modal2.style.display="none"
+  modal2.style.display = "none"
   const modal1 = document.querySelector("#modal1")
-  modal1.style.display="flex"
-  modal1.querySelector ('.js-modal-close').addEventListener('click', () => {
-    modal1.style.display="none"
+  modal1.style.display = "flex"
+  modal1.querySelector('.js-modal-close').addEventListener('click', () => {
+    modal1.style.display = "none"
   })
 }
 )
 
-                      //FormData
+//FormData
 const uploadForm = document.getElementById("uploadForm")
 const imageFile = document.getElementById("imageFile")
 imageFile.onchange = e => {
   const [file] = imageFile.files
   if (file) {
-    votreImg.src=URL.createObjectURL(file)
+    votreImg.src = URL.createObjectURL(file)
+    document.getElementById("ajoutImg").style.display = "none"
+    document.getElementById("labelImg").style.display = "none"
+    votreImg.style.width = "130px"
+    votreImg.style.height = "168px"
   }
 }
 
@@ -287,20 +306,26 @@ uploadForm.addEventListener('submit', (e) => {
 
   formData.append('title', titre)
   formData.append('category', categorie)
-  
+
+  console.log(formData.get("image"))
+  console.log(formData.get("title"))
+  console.log(formData.get("category"))
+
   fetch("http://localhost:5678/api/works", {
-    method: 'POST',
-    body: formData
-  })
-  .then(response => {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      Authorization: "Bearer " + JSON.parse(authenticationFromLocalStorage).token,
+    },
+    body: formData,
+  }).then(response => {
     console.log(response);
-  })
-  .catch(error => {
+  }).catch(error => {
     console.error(error);
   });
 });
 
-//const formAjoutProjet = document.querySelector("form") //On aurait pu mettre la classe ? 
+//const formAjoutProjet = document.querySelector("form") //On aurait pu mettre la classe ?
 //formAjoutProjet.addEventListener("submit", ajoutProjet)
 
 //function ajoutProjet(e){
