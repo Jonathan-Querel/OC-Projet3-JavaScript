@@ -12,8 +12,8 @@ const fetchRemoveWorks = async (id) => {
           "Authorization": "Bearer " + JSON.parse(authenticationFromLocalStorage).token
         }
       })
-      .then(reponse => reponse.json())//pas obligatoire
-      .then(data => console.log(data))//pas obligatoire
+      .then(reponse => reponse.json())
+      .then(data => console.log(data))
   } catch (error) {
     console.error("Il y a eu un problème : " + error);
   }
@@ -46,7 +46,6 @@ const fetchCategory = async () => {
     for (let i = 0; i < data.length; i++) {
       allCategoriesList.add(data[i])
     }
-    console.log(allCategoriesList)
     allCategoriesList.forEach(async (category) => {
       await buildDOMCategory(category);
     })
@@ -108,8 +107,7 @@ const buildModalWork = (work) => {
   modalContainer.classList.add("modalcontainer")
   divTrash.dataset.id = work.id
   divTrash.addEventListener('click', (event) => {
-    event.preventDefault();
-    //console.log(divTrash.dataset.id)
+    event.preventDefault()
     fetchRemoveWorks(divTrash.dataset.id)
   })
 };
@@ -151,11 +149,6 @@ const filteredProject = (categoryId, projets) => {
 
 const buildDOMCategory = async (category) => {
   const listProjects = await fetchAndReturnWorks();
-  //const categoriesData = fetchCategory();
-  //categoriesData.forEach(category => { //m'expliquer ?
-  //    allCategoriesList.add(category); //m'expliquer ?
-  //})
-  //allCategoriesList.forEach(category => {
   const buttonElement = document.createElement("button");
   buttonElement.innerText = category.name;
   buttonElement.classList.add("btn");
@@ -192,7 +185,7 @@ const loginLink = document.querySelector("#login")
 const logoutLink = document.querySelector("#logout")
 const modeEdition = document.querySelector(".edition")
 const modeEdition1 = document.querySelectorAll(".edition1")
-const modeEditionTest = document.querySelector("#modifierprojets") //changement fait pour qu'il soit à coter de Mes projets
+const modeEditionTest = document.querySelector("#modifierprojets")
 
 if (authenticationFromLocalStorage) {
   loginLink.style.display = "none"
@@ -202,7 +195,7 @@ if (authenticationFromLocalStorage) {
   modeEdition1.forEach(element => {
     element.style.display = "flex"
   })
-  modeEditionTest.style.display = "inline-flex" //changement fait pour qu'il soit à coter de Mes projets
+  modeEditionTest.style.display = "inline-flex"
 
 } else {
   loginLink.style.display = "block"
@@ -213,12 +206,6 @@ if (authenticationFromLocalStorage) {
     element.style.display = "none"
   })
 }
-
-logoutLink.addEventListener("click", function () { //a t'on besoin de le rajouter sur la page login vu que je reste sur la page projet quand je Logout
-  authenticationFromLocalStorage = localStorage.removeItem("user");
-  //loginLink.style.display ="block" Comme le token est supprimé cela reprend la condition du dessus
-  //logoutLink.style.display = "none" Donc pas besoin de rajouter ces lignes ?
-})
 
 let modal = null
 
@@ -242,8 +229,6 @@ const closeModal = function (e) {
   modal.setAttribute('aria-hidden', 'true')
   modal.removeAttribute('aria-modal')
   modal.removeEventListener('click', closeModal)
-  //modal.querySelector('.js-modal-close').removeEventListener('click', closeModal)
-  //modal.querySelector ('.js-modal-stop').removeEventListener('click', stopPropagation)
   modal = null
 }
 
@@ -318,20 +303,15 @@ uploadForm.addEventListener('submit', (e) => {
       Authorization: "Bearer " + JSON.parse(authenticationFromLocalStorage).token,
     },
     body: formData,
-  }).then(response => {
+  }).then (response => {
     console.log(response);
+    alert("Projet rajouté avec succès")
   }).catch(error => {
     console.error(error);
   });
 });
 
-//const formAjoutProjet = document.querySelector("form") //On aurait pu mettre la classe ?
-//formAjoutProjet.addEventListener("submit", ajoutProjet)
 
-//function ajoutProjet(e){
-//  e.prevendDefault()
-// const formData = new FormData(formAjoutProjet)
-//  const file = formData.get("file")
-//  const titre = formData.get("titre")
-//  const categorie = formData.get("categorie")
-//}
+logoutLink.addEventListener("click", function () {
+  authenticationFromLocalStorage = localStorage.removeItem("user");
+})

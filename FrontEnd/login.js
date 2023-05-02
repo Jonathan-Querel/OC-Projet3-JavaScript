@@ -1,6 +1,8 @@
-const authenticationFromLocalStorage = localStorage.getItem("user");
+const baliseForm = document.querySelector("form");
 const loginLink = document.querySelector("#login")
 const logoutLink = document.querySelector("#logout")
+const authenticationFromLocalStorage = localStorage.getItem("user");
+
 
 if (authenticationFromLocalStorage) {
     loginLink.style.display = "none"
@@ -10,9 +12,7 @@ if (authenticationFromLocalStorage) {
     logoutLink.style.display = "none"
   }
 
-
-const baliseForm = document.querySelector("form");
-
+baliseForm.addEventListener("submit", connexion)
 
 async function connexion(e) {
         e.preventDefault();
@@ -43,7 +43,6 @@ async function connexion(e) {
         }
     };
 
-baliseForm.addEventListener("submit", connexion)
 
 logoutLink.addEventListener("click", function() {
     authenticationFromLocalStorage = localStorage.removeItem("user");
