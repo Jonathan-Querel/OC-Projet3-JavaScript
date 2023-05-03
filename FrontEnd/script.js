@@ -2,7 +2,6 @@ document.getElementById("modal1").style.display = "none";
 document.getElementById("modal2").style.display = "none";
 
 const fetchRemoveWorks = async (id) => {
-  try {
     await fetch(`http://localhost:5678/api/works/${id}`,
       {
         method: "DELETE",
@@ -14,10 +13,9 @@ const fetchRemoveWorks = async (id) => {
       })
       .then(reponse => reponse.json())
       .then(data => console.log(data))
-  } catch (error) {
-    console.error("Il y a eu un problème : " + error);
+      .catch(error => console.log("Il y a eu un problème : " + error))
   }
-}
+
 
 
 
@@ -292,9 +290,6 @@ uploadForm.addEventListener('submit', (e) => {
   formData.append('title', titre)
   formData.append('category', categorie)
 
-  console.log(formData.get("image"))
-  console.log(formData.get("title"))
-  console.log(formData.get("category"))
 
   fetch("http://localhost:5678/api/works", {
     method: "POST",
@@ -303,8 +298,9 @@ uploadForm.addEventListener('submit', (e) => {
       Authorization: "Bearer " + JSON.parse(authenticationFromLocalStorage).token,
     },
     body: formData,
-  }).then (response => {
-    console.log(response);
+  }).then (() => {
+    document.querySelector(".gallery").innerHTML = ""
+    fetchAndBuildWorks()
     alert("Projet rajouté avec succès")
   }).catch(error => {
     console.error(error);
