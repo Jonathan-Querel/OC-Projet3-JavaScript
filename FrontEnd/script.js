@@ -11,8 +11,7 @@ const fetchRemoveWorks = async (id) => {
           "Authorization": "Bearer " + JSON.parse(authenticationFromLocalStorage).token
         }
       })
-      .then(reponse => reponse.json())
-      .then(data => console.log(data))
+      .then(data => alert("le projet a bien été supprimé."))
       .catch(error => console.log("Il y a eu un problème : " + error))
   }
 
@@ -57,7 +56,7 @@ const fetchAndBuildWorks = async () => {
   for (let i = 0; i < listProjects.length; i++) {
     buildDOMWork(listProjects[i]);
     buildModalWork(listProjects[i]);
-  }
+}
 }
 //Construction du DOM pour les travaux
 const buildDOMWork = (work) => {
@@ -67,6 +66,7 @@ const buildDOMWork = (work) => {
   imgElement.alt = work.title;
   const figcaptionElement = document.createElement("figcaption");
   figcaptionElement.innerText = work.title;
+  figureElement.id = "work-" + work.id
   //Rattachement des balises au DOM
   figureElement.appendChild(imgElement);
   figureElement.appendChild(figcaptionElement);
@@ -106,6 +106,8 @@ const buildModalWork = (work) => {
   divTrash.dataset.id = work.id
   divTrash.addEventListener('click', (event) => {
     event.preventDefault()
+    divTrash.parentElement.remove() // Suppression du projet dans la modal
+    document.getElementById("work-" + divTrash.dataset.id).remove() // Suppression du projet dans la gallery
     fetchRemoveWorks(divTrash.dataset.id)
   })
 };
@@ -162,7 +164,7 @@ const buildDOMCategory = async (category) => {
     filteredProject(category.id, listProjects);
   });
   if (category.id !== 0) { // Tous = 0
-    const selectCategories = document.getElementById("categorie")
+    const selectCategories = document.getElementById("categorie")// partie modale (menu déroulant)
     const option = document.createElement("option")
     option.value = category.id
     option.innerText = category.name
@@ -300,8 +302,10 @@ uploadForm.addEventListener('submit', (e) => {
     body: formData,
   }).then (() => {
     document.querySelector(".gallery").innerHTML = ""
+    document.getElementById("modalcontainer").innerHTML = "";
     fetchAndBuildWorks()
     alert("Projet rajouté avec succès")
+    document.getElementById("modal2").style.display = "none";
   }).catch(error => {
     console.error(error);
   });
