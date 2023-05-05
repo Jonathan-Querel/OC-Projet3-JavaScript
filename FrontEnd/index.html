@@ -165,15 +165,15 @@
 							<!--<i class="fa-sharp fa-regular fa-image"></i>-->
 							<img src="./assets/icons/placeholder.png" alt="placeholder" id="votreImg"
 								class="votreImg" />
-							<input accept="image/*" type="file" id="imageFile" name="imageFile" required>
+							<input accept="image/*" type="file" id="imageFile" name="imageFile">
 							<button id="ajoutImg" type="button">+ Ajouter photo</button>
 							<label for="ajoutImg" id="labelImg">jpg, png : 4mo max</label>
 						</div>
 
 						<label for="titre">Titre</label>
-						<input type="text" name="titre" id="titre" required />
+						<input type="text" name="titre" id="titre" />
 						<label for="categorie">Catégorie</label>
-						<select name="categorie" id="categorie" required>
+						<select name="categorie" id="categorie">
 							<option value=""></option>
 							<!-- <option value="1">Objets</option>
 							<option value="2">Appartements</option>
@@ -181,7 +181,7 @@
 						</select>
 				</div>
 
-				<input type="submit" value="Valider">
+				<input type="submit" value="Valider" id="boutonSubmit">
 
 				</form>
 		</aside>
